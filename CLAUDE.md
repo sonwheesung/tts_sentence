@@ -246,7 +246,7 @@ docs/                   세부 문서
 | 항목 | 상태 |
 |---|---|
 | 에뮬레이터 AVD `tts_sentence`(5586) | ✅ 2026-09-26 생성 · `D:\emulators	ts_sentence` (`DEV_ALLOCATION.md` §3) |
-| Play Console 앱 | ➖ 출시를 정할 때 |
+| Play Console 앱 | ✅ 2026-09-26 생성 · 앱 ID `4973195218256924403` · 기본 언어 ko-KR (사용자 지시: 내부 테스트로 등록). 🔴 업로드 대기: 서비스 계정 권한이 사용자 몫이다(`docs/BUILD.md` §4) |
 | AdMob 앱 · 광고 단위 | ➖ 반응이 좋을 때(결정 #5) |
 | 수정사항 시트 탭 `tts_sentence` | ✅ 2026-09-26 `양식` 복사로 생성 · `/check` 기준선 0건 저장 (`common/FIX_REQUESTS.md` §2) |
 | 빌드 보관 폴더 `D:uilds	ts_sentence\` | ✅ 2026-09-26 생성 (`common/BUILD_ARTIFACTS.md` §1) |

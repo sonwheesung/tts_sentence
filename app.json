@@ -32,7 +32,8 @@
           "backgroundColor": "#2563EB"
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      "./plugins/with-upload-signing.js"
     ],
     "experiments": {
       "typedRoutes": true,

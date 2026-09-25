@@ -11,6 +11,7 @@
 | [`PLAYER_SYSTEM.md`](./PLAYER_SYSTEM.md) | 대기열 · 반복 · 백그라운드 재생 | ✅ |
 | [`DATABASE.md`](./DATABASE.md) | 스키마 · 마이그레이션 | ✅ |
 | [`UI_GUIDE.md`](./UI_GUIDE.md) | 화면 표 · 토큰 · 금지 목록 | ✅ |
+| [`BUILD.md`](./BUILD.md) | 업로드 키 · AAB · Play 업로드 · 빌드 실측 | ✅ |
 
 ## 2. 구현 현황
 
@@ -29,6 +30,7 @@
 ```bash
 npm run typecheck
 npm run lint
+npm run build:aab      # 릴리스 AAB (서명 게이트 포함 · docs/BUILD.md)
 ```
 
 에뮬레이터: AVD `tts_sentence` · `emulator-5586` · Metro 8093 (`common/DEV_ALLOCATION.md`).

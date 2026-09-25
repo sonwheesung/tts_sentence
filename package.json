@@ -8,7 +8,8 @@
     "android": "expo run:android --port 8093",
     "typecheck": "tsc --noEmit",
     "lint": "expo lint",
-    "ios": "expo run:ios"
+    "build:aab": "bash scripts/build-aab.sh",
+    "play:upload": "node scripts/play-upload.mjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
