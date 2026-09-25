@@ -18,7 +18,7 @@
 `npm run build:aab` (`scripts/build-aab.sh`) 가 전부 한다: 검증 → prebuild(서명 값 주입) → 🔴 게이트(서명이 `android/` 에 들어갔나 · versionCode 일치) → `bundleRelease` → 🔴 서명 SHA1 대조 → 병합 권한 출력 → `D:\builds\tts_sentence\sentencetts-vc<N>.aab` 로 보관.
 값이 없으면 플러그인(`plugins/with-upload-signing.js`)이 디버그 키로 조용히 떨어지고 빌드는 성공한다. 그래서 게이트를 코드에 뒀다(`PLAY_FIRST_UPLOAD.md` §3).
 
-## 2. 업로드 키 — 🔴 잃으면 되돌릴 수 없다
+## 2. 업로드 키: 🔴 잃으면 되돌릴 수 없다
 
 | | |
 |---|---|
@@ -42,7 +42,7 @@
   첫 화면까지 뜸 · `ReactNativeJS: Running "main"` · 문장 추가 → [듣기] → 미디어 세션 `PLAYING` · FATAL 0.
   ⚠ bundletool 이 이 PC 에 없어서 AAB 자체가 아니라 **같은 설정의 APK** 로 쟀다. 기기에 개발 빌드가 있었다면 서명이 달라 지우고 깔아야 한다
 
-## 4. 업로드 — 🔴 선행 조건 (사용자 몫)
+## 4. 업로드: 🔴 선행 조건 (사용자 몫)
 
 브라우저로는 AAB 를 못 올린다(파일 입력 10MB 상한 · vc1 은 59.7MB). 서비스 계정으로 API 를 부른다.
 
