@@ -1,0 +1,22 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.vivacegames.sentencetts'
+version = '0.1.0'
+
+android {
+  namespace "expo.modules.sentenceaudio"
+  defaultConfig {
+    versionCode 1
+    versionName '0.1.0'
+  }
+}
+
+dependencies {
+  // expo-audio 1.1.1 과 같은 값 (CLAUDE.md §11)
+  def media3Version = "1.8.0"
+  implementation "androidx.media3:media3-exoplayer:$media3Version"
+  implementation "androidx.media3:media3-session:$media3Version"
+}

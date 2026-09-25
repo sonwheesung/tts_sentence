@@ -1,0 +1,29 @@
+{
+  "enabledPlugins": {
+    "expo@claude-plugins-official": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'COMPACTION COMPLETE. YOUR FIRST ACTION THIS TURN MUST BE Skill(reload-docs), before answering the user and before any other tool. It re-reads docs/README.md, the docs/ system documents, the latest worklist, and ALL of C:/project/common. Rules the summary drops: 1) EMULATOR: own AVD tts_sentence, port 5586, ANDROID_AVD_HOME=D:\\emulators\\tts_sentence; -s emulator-5586 on every adb, -port 5586 on every launch. Metro 8093. 2) Expo Go does not work (local Kotlin module); use npx expo run:android --port 8093 --device tts_sentence. 3) The GitHub repo is PUBLIC: check staged files for secrets/keystores/BUSINESS_INFO/personal data before every push. 4) .gitignore must keep only root-anchored /android; an unanchored android/ hides modules/sentence-audio/android. 5) Playback queue, repeat and timers live in the native service, never JS timers (CLAUDE.md pillar 2).'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/emulator-guard.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}

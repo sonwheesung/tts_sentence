@@ -1,0 +1,149 @@
+{
+  "app": {
+    "name": "읽어줘"
+  },
+  "common": {
+    "back": "뒤로",
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "수정",
+    "listen": "듣기",
+    "confirm": "확인",
+    "ad": "광고"
+  },
+  "tabs": {
+    "sentences": "문장",
+    "playlists": "재생목록",
+    "settings": "설정"
+  },
+  "sentences": {
+    "title": "내 문장",
+    "add": "문장 추가",
+    "playAll": "전체 듣기",
+    "empty": "아직 저장한 문장이 없어요.\n위의 '문장 추가'를 눌러 첫 문장을 적어 보세요.",
+    "voiceTag": "목소리: {{name}}"
+  },
+  "sentenceEdit": {
+    "newTitle": "새 문장",
+    "editTitle": "문장 고치기",
+    "placeholder": "여기에 들을 문장을 적어 주세요",
+    "counter": "{{n}} / {{max}}자",
+    "voice": "읽어 줄 목소리",
+    "voiceDefault": "기본 목소리 따르기",
+    "preview": "미리 듣기",
+    "emptyText": "문장을 적어 주세요.",
+    "deleteTitle": "이 문장을 지울까요?",
+    "deleteBody": "지우면 되돌릴 수 없어요.",
+    "deleteBodyInPlaylists": "이 문장이 들어 있는 재생목록 {{n}}개에서도 함께 빠져요. 지우면 되돌릴 수 없어요.",
+    "voiceDefaultSub": "지금 기본: {{name}}"
+  },
+  "playlists": {
+    "title": "재생목록",
+    "add": "새 재생목록",
+    "empty": "재생목록이 없어요.\n문장을 모아 두면 처음부터 끝까지 이어서 들을 수 있어요.",
+    "count": "문장 {{n}}개",
+    "nameTitle": "재생목록 이름",
+    "namePlaceholder": "예: 아침에 들을 문장",
+    "renameTitle": "이름 바꾸기"
+  },
+  "playlist": {
+    "play": "처음부터 듣기",
+    "addSentences": "문장 넣기",
+    "rename": "이름 바꾸기",
+    "empty": "아직 넣은 문장이 없어요.\n'문장 넣기'를 눌러 골라 주세요.",
+    "listenFromHere": "여기부터",
+    "remove": "빼기",
+    "moveUp": "위로",
+    "moveDown": "아래로",
+    "deleteTitle": "재생목록을 지울까요?",
+    "deleteBody": "재생목록만 지워지고 문장은 그대로 남아요."
+  },
+  "pick": {
+    "title": "넣을 문장 고르기",
+    "add": "{{n}}개 넣기",
+    "none": "문장을 골라 주세요",
+    "empty": "저장한 문장이 없어요. 먼저 '문장' 탭에서 문장을 추가해 주세요."
+  },
+  "settings": {
+    "title": "설정",
+    "playback": "듣기 설정",
+    "repeat": "반복",
+    "repeatTimes": "{{n}}번",
+    "repeatInfinite": "계속 반복",
+    "repeatHelp": "목록을 몇 번 들을지 정해요.",
+    "gap": "문장 사이 쉬는 시간",
+    "gapSeconds": "{{s}}초",
+    "gapNone": "없음",
+    "speed": "빠르기",
+    "shuffle": "순서 섞기",
+    "shuffleHelp": "목록의 문장을 섞어서 들어요.",
+    "voices": "목소리",
+    "manageVoices": "목소리 관리",
+    "storage": "저장 공간",
+    "cache": "음성 임시 파일 {{size}}",
+    "clearCache": "비우기",
+    "clearCacheDone": "비웠어요.",
+    "version": "버전 {{v}}"
+  },
+  "presets": {
+    "title": "목소리 관리",
+    "add": "새 목소리",
+    "default": "기본",
+    "makeDefault": "기본으로",
+    "help": "문장마다 목소리를 따로 고를 수 있어요. 고르지 않은 문장은 '기본' 목소리로 읽어요.",
+    "summary": "빠르기 {{rate}} · 높낮이 {{pitch}}",
+    "noKorean": "이 휴대폰에 한국어 목소리가 없어요. 휴대폰 설정에서 한국어 음성 데이터를 받으면 한국어 문장을 자연스럽게 읽어요.",
+    "openTtsSettings": "휴대폰 음성 설정 열기"
+  },
+  "presetEdit": {
+    "newTitle": "새 목소리",
+    "editTitle": "목소리 고치기",
+    "name": "이름",
+    "namePlaceholder": "예: 천천히 또박또박",
+    "engine": "음성 엔진",
+    "engineDefault": "휴대폰 기본 엔진",
+    "voice": "목소리",
+    "voiceDefault": "엔진 기본 목소리",
+    "voiceLabel": "{{lang}} 목소리 {{n}}",
+    "voiceMissing": "이 휴대폰에 없는 목소리예요. 엔진 기본 목소리로 읽어요.",
+    "voicesLoading": "목소리를 불러오는 중이에요",
+    "voicesFailed": "이 엔진의 목소리를 불러오지 못했어요.",
+    "rate": "빠르기",
+    "pitch": "높낮이",
+    "preview": "미리 듣기",
+    "previewText": "안녕하세요. 이 목소리로 문장을 읽어 드릴게요.",
+    "defaultName": "기본 목소리",
+    "cantDelete": "기본 목소리는 지울 수 없어요. 다른 목소리를 먼저 기본으로 정해 주세요.",
+    "deleteTitle": "이 목소리를 지울까요?",
+    "deleteBody": "이 목소리를 쓰던 문장은 기본 목소리로 읽게 돼요.",
+    "emptyName": "이름을 적어 주세요."
+  },
+  "player": {
+    "title": "지금 듣는 중",
+    "preparing": "음성을 준비하고 있어요",
+    "position": "{{i}} / {{n}}",
+    "loop": "{{i}}번째 / {{n}}번",
+    "loopInfinite": "{{i}}번째 · 계속 반복",
+    "play": "재생",
+    "pause": "일시정지",
+    "next": "다음 문장",
+    "previous": "이전 문장",
+    "queue": "들을 목록",
+    "sleep": "꺼짐 예약",
+    "sleepOff": "안 함",
+    "sleepMinutes": "{{m}}분 뒤",
+    "sleepEndOfLoop": "이번 바퀴 끝나면",
+    "sleepAt": "{{time}}에 멈춰요",
+    "sleepLoopOn": "이번 바퀴 끝나면 멈춰요",
+    "ended": "다 들었어요",
+    "errorSynth": "음성을 만들지 못했어요. 목소리 설정을 확인해 주세요.",
+    "errorPartial": "일부 문장은 음성을 만들지 못해 건너뛰어요.",
+    "nothing": "듣고 있는 문장이 없어요.",
+    "allSentences": "내 문장 전체",
+    "oneSentence": "문장 하나"
+  },
+  "repeatPicker": {
+    "title": "몇 번 들을까요?"
+  }
+}

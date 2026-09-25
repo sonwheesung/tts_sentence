@@ -1,0 +1,75 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+app-example
+
+# generated native folders
+/ios
+/android
+
+# Native (CNG output). 🔴 루트 고정(/android)만 쓴다. 앵커 없는 android/ 는 modules/sentence-audio/android 까지 숨긴다(2026-09-26)
+
+# 빌드 산출물
+*.aab
+
+# 서명 자격증명 — 절대 커밋 금지 (2026-08-18 keystore.pass 노출 사고 후 디렉터리째 제외)
+credentials/
+
+# 시크릿 파일명 방어 (2026-09-09). 지금 이런 파일이 있다는 뜻이 아니라, 생겨도 안 올라간다는 뜻이다.
+# 🔴 원격이 공개 저장소다. 눈으로 읽지 말고 `git check-ignore -q "<후보 파일명>"` 으로 시험한다.
+secrets/
+*.keystore
+*.jks
+*service-account*.json
+# env 파일은 전부 막는다(2026-09-15 사용자 지시: 유출되면 안 되는 값은 gitignore). 예시 파일만 허용.
+.env
+.env.*
+!.env.example
+
+# Claude Code 로컬 설정(개인 훅·권한) — 스킬(.claude/skills/)은 커밋한다
+.claude/settings.local.json
+# /check 스킬이 시트에서 읽은 결과와 지난 기록(2026-09-15 · 정본 common/FIX_REQUESTS.md §7.1)
+.claude/skills/check/
+# ↑ 폴더째 제외(2026-09-26). 형제는 *.json 만 뺀다. 이 레포는 공개라 SKILL.md 의 비공개 시트 주소도 올리지 않는다.
+#   원본은 common/FIX_REQUESTS.md §7.2·§7.3 이라 잃어도 다시 복사하면 된다.
+.claude/worktrees/
+
+# 로컬 모듈의 Gradle 산출물(루트 /android 만 막으면 이것이 새어 나온다 · 2026-09-26)
+modules/*/android/build/
+modules/*/android/.cxx/
+modules/*/android/.gradle/
