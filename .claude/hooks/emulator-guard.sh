@@ -12,7 +12,7 @@ case "$cmd" in
   *) exit 0 ;;
 esac
 
-echo "🔴 읽어줘 에뮬레이터 (정본: common/DEV_ALLOCATION.md §3 · common/EMULATOR_POOL.md)"
+echo "🔴 낭랑 에뮬레이터 (정본: common/DEV_ALLOCATION.md §3 · common/EMULATOR_POOL.md)"
 echo "   AVD tts_sentence · -port 5586 · serial emulator-5586 · ANDROID_AVD_HOME='D:\\emulators\\tts_sentence'"
 echo "   ① 모든 adb 에 -s emulator-5586  ② -port 를 빼면 5554 로 가서 남의 에뮬을 덮는다  🚫 남의 AVD·앱은 건드리지 않는다"
 

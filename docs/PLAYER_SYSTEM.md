@@ -88,7 +88,7 @@ getState()
 
 ## 7. 알림 · 잠금화면
 
-- Media3 `DefaultMediaNotificationProvider` 를 쓴다. 제목 = 문장 앞 40자, 부제 = 재생목록 이름(없으면 `읽어줘`).
+- Media3 `DefaultMediaNotificationProvider` 를 쓴다. 제목 = 문장 앞 40자, 부제 = 재생목록 이름(없으면 `낭랑`).
 - 버튼: 이전 · 재생/일시정지 · 다음.
 - Android 13+ 알림 권한: 미디어 세션 알림은 권한 요청 대상에서 빠진다. 권한을 묻지 않는다.
 - 알림을 눌러 앱을 열면 재생 화면이 아니라 앱이 마지막에 있던 화면으로 간다(단순함).

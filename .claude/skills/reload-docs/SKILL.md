@@ -7,7 +7,7 @@ description: Re-read a project's entire docs/ knowledge base to restore full con
 
 `/compact`는 대화를 요약하며 **문서의 세부(수치·계약·구현 위치)를 잃는다**. 프로젝트의 `docs/`(또는 그에 준하는 문서 디렉토리)가 단일 진실 원천이면, 요약 직후·새 세션 작업 전에 **문서 전체를 한 번에 다시 읽어** 맥락을 복원한다.
 
-## 읽어줘(tts_sentence) 판: 읽는 순서
+## 낭랑(tts_sentence) 판: 읽는 순서
 
 common 판에 이 절만 더했다(2026-09-26). 나머지는 common 과 같다.
 

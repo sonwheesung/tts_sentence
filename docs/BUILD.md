@@ -7,11 +7,11 @@
 
 | 항목 | 상태 |
 |---|---|
-| Play 앱 | ✅ **읽어줘** · 앱 ID `4973195218256924403` · `com.vivacegames.sentencetts` · 기본 언어 ko-KR · 앱 · 무료 · 자동 보호 켜짐 (2026-09-26 생성) |
+| Play 앱 | ✅ **낭랑**(콘솔 등록명은 아직 `읽어줘` · 결정 #15) · 앱 ID `4973195218256924403` · `com.vivacegames.sentencetts` · 기본 언어 ko-KR · 앱 · 무료 · 자동 보호 켜짐 (2026-09-26 생성) |
 | 업로드 키 | ✅ 2026-09-26 생성 (§2) |
 | AAB vc1 (0.1.0) | ✅ 구움 · `D:\builds\tts_sentence\sentencetts-vc1.aab` (59,654,197 bytes) · 업로드 키 서명 확인 |
 | 서비스 계정 → 이 앱 권한 | ✅ 2026-09-28 · `앱을 테스트 트랙으로 출시` 만(프로덕션 꺼짐 확인). 세션이 권한 창을 채우고 **적용·저장·예 는 사용자가 눌렀다**(자동 모드 분류기가 세션의 권한 부여를 막았다) |
-| 내부 테스트 업로드 · 게시 | ✅ **2026-09-28 18:36 게시** · vc1 (0.1.0) · `internal · completed`(API 확인) · 테스터 `사장님 검증 전용`(2명) + **`가족`(2명 · 2026-09-28 사용자 지시로 추가 · 새로고침 후 유지 확인)** · 검토되지 않음 · 신규 설치 19.8MB · 프로덕션 출시 0건(API 확인) |
+| 내부 테스트 업로드 · 게시 | ✅ **vc2 (0.2.0) 2026-09-28 게시**(API `internal completed versionCode 2`) · 앱 이름 낭랑 · 안 쓰는 권한 제거. 이전: vc1 (0.1.0) 18:36 · `internal · completed`(API 확인) · 테스터 `사장님 검증 전용`(2명) + **`가족`(2명 · 2026-09-28 사용자 지시로 추가 · 새로고침 후 유지 확인)** · 검토되지 않음 · 신규 설치 19.8MB · 프로덕션 출시 0건(API 확인) |
 
 ## 1. 왜 스크립트인가
 
@@ -41,6 +41,16 @@
 - ✅ **릴리스 빌드를 켜 봤다**(SnoreLess vc11 교훈 · `common/PLAY_CONSOLE_STATUS.md`). 같은 서명·같은 JS 로 `assembleRelease`(x86_64) APK 를 뽑아 `emulator-5586` 에 깔았다:
   첫 화면까지 뜸 · `ReactNativeJS: Running "main"` · 문장 추가 → [듣기] → 미디어 세션 `PLAYING` · FATAL 0.
   ⚠ bundletool 이 이 PC 에 없어서 AAB 자체가 아니라 **같은 설정의 APK** 로 쟀다. 기기에 개발 빌드가 있었다면 서명이 달라 지우고 깔아야 한다
+
+## 3.1 vc2 실측 (2026-09-28)
+
+- 바뀐 것: 앱 이름 **낭랑**(결정 #15 · `aapt2 dump badging` 으로 `application-label:'낭랑'` 확인) · `blockedPermissions` 에 `DUMP` · `READ/WRITE_EXTERNAL_STORAGE` · `VIBRATE`
+- 앱이 요청하는 권한 5개(기기 `dumpsys package` 실측): `FOREGROUND_SERVICE` · `FOREGROUND_SERVICE_MEDIA_PLAYBACK` · `INTERNET` · `ACCESS_NETWORK_STATE` · `WAKE_LOCK`
+  - ⚠ `build-aab.sh` 의 권한 출력에는 `DUMP` 가 **여전히 찍힌다.** 매니페스트의 문자열을 훑기 때문이다. 이것은 요청 권한이 아니라 androidx profileinstaller 수신기의 `android:permission="android.permission.DUMP"`(부르는 쪽이 가져야 하는 권한)다. 요청 권한은 기기에서 `dumpsys package` 로 본다
+- 릴리스 APK(같은 서명)를 vc1 위에 덮어 깔았다: 저장해 둔 문장이 남아 있었다 · [듣기] → `PLAYING` · FATAL 0
+- 게시 경고는 vc1 과 같은 1개(가독화 파일 없음). 「지원 기기 변경」 안내가 떴지만 제외된 기기 목록은 비어 있었다
+- ⚠ 콘솔 「저장 및 출시」 첫 클릭 뒤 확인창이 JS 로는 안 잡혔다. 스크린샷으로 확인창을 보고 `find` 로 그 안의 버튼을 눌렀다. **누른 뒤에는 API `--verify` 로 completed 를 확인한다**(첫 시도 뒤에는 draft 그대로였다)
+- Play 의 표시 이름은 아직 `읽어줘`/`(unreviewed)` 다. 스토어 등록정보를 만들 때 바꾼다
 
 ## 4. 업로드: 🔴 선행 조건 (사용자 몫)
 

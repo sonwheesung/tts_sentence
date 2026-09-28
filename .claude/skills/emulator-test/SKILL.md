@@ -7,7 +7,7 @@ description: Drive an Expo/React Native app on a real Android emulator end-to-en
 
 Claude가 안드로이드 에뮬레이터로 앱을 **실제 띄우고, 스크린샷으로 보고, 좌표로 탭**해 사용자 정의 시나리오(사이클)를 끝까지 돈다. 단위·컴포넌트 테스트가 못 보는 **실기기 렌더·전이·터치**를 사람 눈으로 잡는다(테스트 PASS인데 실기기 버그 = 거짓 확신).
 
-> **읽어줘(tts_sentence) 판**: common 판의 플레이스홀더를 이 프로젝트 값으로 채웠다(2026-09-26). 값의 정본은 `C:\project\common\DEV_ALLOCATION.md` §1·§3 이다. 그쪽이 바뀌면 여기도 고친다.
+> **낭랑(tts_sentence) 판**: common 판의 플레이스홀더를 이 프로젝트 값으로 채웠다(2026-09-26). 값의 정본은 `C:\project\common\DEV_ALLOCATION.md` §1·§3 이다. 그쪽이 바뀌면 여기도 고친다.
 
 ## 진행 규율 (불변)
 
@@ -157,7 +157,7 @@ MSYS_NO_PATHCONV=1 "$ADB" -s "$SER" shell cat /sdcard/ui.xml > ui.xml
 
 > 같은 화면이라도 *어떤 경로로 왔는가*가 상태를 가른다(게이트·캐시·세션). ⑥⑦을 생략하면 버그가 재현 안 된다.
 
-## 읽어줘 전용 메모 (2026-09-26 실측)
+## 낭랑 전용 메모 (2026-09-26 실측)
 
 - 재생 상태는 화면보다 **미디어 세션**이 정확하다. 화면을 끈 채로도 읽힌다:
   `"$ADB" -s "$SER" shell dumpsys media_session | grep -A16 'package=com.vivacegames.sentencetts' | grep -oE 'state=[A-Z]+\([0-9]\)|description=[^,]*'`
