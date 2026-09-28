@@ -37,7 +37,7 @@ EMU="$LOCALAPPDATA/Android/Sdk/emulator/emulator.exe"
 "$ADB" -s emulator-5586 emu avd name    # 🔴 포트로 AVD 를 식별하지 않는다. 이름을 물어본다
 
 # ② 내 AVD 가 없으면 만든다 (프로젝트당 한 번)
-export ANDROID_AVD_HOME='D:\emulators	ts_sentence'    # 🔴 이 줄을 빼먹으면 C: 에 만들어진다
+export ANDROID_AVD_HOME='D:\emulators\tts_sentence'    # 🔴 이 줄을 빼먹으면 C: 에 만들어진다
 mkdir -p "/d/emulators/tts_sentence"
 avdmanager create avd -n tts_sentence -k "system-images;android-35;google_apis;x86_64" -d pixel_6
 ```
@@ -77,7 +77,7 @@ emu kill        끄고 끝난다
 ## 1. 부팅 + 빌드·설치
 
 ```bash
-export ANDROID_AVD_HOME='D:\emulators	ts_sentence'   # 🔴 띄울 때도 필요하다
+export ANDROID_AVD_HOME='D:\emulators\tts_sentence'   # 🔴 띄울 때도 필요하다
 "$EMU" -avd tts_sentence -port 5586 -no-snapshot -no-snapshot-save -no-boot-anim -gpu auto &
 # 🔴 -port 고정: 빼면 조용히 5554 로 가서 **남의 에뮬을 덮는다**
 # 🔴 -no-snapshot-save: 빼면 종료할 때 snapshots/default_boot 가 **GB 단위로** 쌓인다

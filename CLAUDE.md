@@ -245,11 +245,11 @@ docs/                   세부 문서
 
 | 항목 | 상태 |
 |---|---|
-| 에뮬레이터 AVD `tts_sentence`(5586) | ✅ 2026-09-26 생성 · `D:\emulators	ts_sentence` (`DEV_ALLOCATION.md` §3) |
+| 에뮬레이터 AVD `tts_sentence`(5586) | ✅ 2026-09-26 생성 · `D:\emulators\tts_sentence` (`DEV_ALLOCATION.md` §3) |
 | Play Console 앱 | ✅ 2026-09-26 생성 · 앱 ID `4973195218256924403` · 기본 언어 ko-KR (사용자 지시: 내부 테스트로 등록). ✅ **2026-09-28 내부 테스트 게시** vc1 (0.1.0) · 테스터 `사장님 검증 전용` (`docs/BUILD.md` §0) |
 | AdMob 앱 · 광고 단위 | ➖ 반응이 좋을 때(결정 #5) |
 | 수정사항 시트 탭 `tts_sentence` | ✅ 2026-09-26 `양식` 복사로 생성 · `/check` 기준선 0건 저장 (`common/FIX_REQUESTS.md` §2) |
-| 빌드 보관 폴더 `D:uilds	ts_sentence\` | ✅ 2026-09-26 생성 (`common/BUILD_ARTIFACTS.md` §1) |
+| 빌드 보관 폴더 `D:\builds\tts_sentence\` | ✅ 2026-09-26 생성 (`common/BUILD_ARTIFACTS.md` §1) |
 | ❓ Android 개발자 인증(Play 밖 설치) | 부모님 폰에 APK 를 직접 설치하는 방식이 Google 개발자 인증 요건에 걸리는지 **확인 안 됨**. `BUSINESS_INFO.md` §4 는 형제 앱에 "해당 없음"으로 적었는데, 이 앱은 바로 Play 밖 설치다. 설치 전에 본다 |
 
 ---

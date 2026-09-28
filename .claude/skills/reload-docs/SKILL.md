@@ -19,12 +19,13 @@ common 판에 이 절만 더했다(2026-09-26). 나머지는 common 과 같다.
 
 ### 컴팩트 요약이 자주 떨어뜨리는 이 프로젝트 규칙
 
-- 에뮬레이터: AVD `tts_sentence` · `-port 5586` · 모든 adb 에 `-s emulator-5586` · `ANDROID_AVD_HOME='D:\emulators	ts_sentence'`. Metro 8093.
+- 에뮬레이터: AVD `tts_sentence` · `-port 5586` · 모든 adb 에 `-s emulator-5586` · `ANDROID_AVD_HOME='D:\emulators\tts_sentence'`. Metro 8093.
 - Expo Go 로는 안 돈다. `npx expo run:android --port 8093 --device tts_sentence` (개발 빌드).
 - 🔴 **원격 저장소가 공개(public)다.** 푸시 전에 스테이징된 파일에 비밀값·키스토어·`BUSINESS_INFO` 내용·개인정보가 없는지 본다(`common/SECRET_HANDLING.md` · `COMMIT_CONVENTION.md` §8).
 - 🔴 `.gitignore` 의 `android/` 는 **루트 고정(`/android`)만**. 앵커 없는 줄은 `modules/sentence-audio/android` 를 숨긴다.
 - 서버·로그인 없음. 재생 대기열은 네이티브 서비스가 쥔다(JS 타이머로 다음 문장을 넘기지 않는다 · CLAUDE.md 기둥 2).
 - 사용자에게 보이는 한국어는 사람 검수 대상이다(`common/KOREAN_WRITING.md` §2).
+- 🔴 Windows 경로를 python 문자열로 쓰지 않는다. `	`·`` 가 탭·백스페이스로 바뀌어 `D:\emulators	ts_sentence` 가 조용히 깨졌다(2026-09-28 · CLAUDE.md · 이 스킬 · emulator-test · common 두 문서). 경로가 든 글은 Write/Edit 도구로 쓰고, 쓴 뒤 제어문자를 센다(`COMMIT_CONVENTION.md` §7).
 
 ## 무엇을 읽나
 
