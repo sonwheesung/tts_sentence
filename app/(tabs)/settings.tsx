@@ -1,4 +1,5 @@
 import Constants from 'expo-constants';
+import * as Updates from 'expo-updates';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +11,13 @@ import { cacheSizeBytes, clearCache } from '@/features/tts';
 import { COLOR, SPACE, TYPE } from '@/theme';
 
 // 설정 탭 (깊이 0)
+
+/** runtime · 업데이트 id 앞 8자(임베드면 embedded) · 게시 시각. OTA 가 실제로 닿았는지 이 줄로 본다 */
+function buildMarker(): string {
+  const id = Updates.isEmbeddedLaunch || !Updates.updateId ? 'embedded' : Updates.updateId.slice(0, 8);
+  const at = Updates.createdAt ? ` · ${Updates.createdAt.toISOString().slice(0, 16).replace('T', ' ')}` : '';
+  return `runtime ${Updates.runtimeVersion ?? '-'} · update ${id}${at}`;
+}
 
 function formatBytes(n: number): string {
   if (n < 1024 * 1024) return `${Math.round(n / 1024)}KB`;
@@ -68,6 +76,8 @@ export default function SettingsTab() {
         </Section>
 
         <Text style={styles.version}>{t('settings.version', { v: Constants.expoConfig?.version ?? '' })}</Text>
+        {/* OTA 전달 확인 마커(docs/BUILD.md §5). 사용자에게는 뜻 없는 작은 글자다 */}
+        <Text style={styles.build}>{buildMarker()}</Text>
       </ScrollView>
     </Screen>
   );
@@ -80,4 +90,5 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: SPACE.md },
   body18: { ...TYPE.body, color: COLOR.text, flex: 1 },
   version: { ...TYPE.caption, color: COLOR.textFaint, textAlign: 'center', paddingTop: SPACE.xl },
+  build: { ...TYPE.caption, color: COLOR.textFaint, textAlign: 'center', paddingTop: SPACE.xs },
 });

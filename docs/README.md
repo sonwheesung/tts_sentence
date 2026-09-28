@@ -36,6 +36,13 @@ npm run build:aab      # 릴리스 AAB (서명 게이트 포함 · docs/BUILD.md
 에뮬레이터: AVD `tts_sentence` · `emulator-5586` · Metro 8093 (`common/DEV_ALLOCATION.md`).
 🔴 모든 `adb` 에 `-s emulator-5586` 을 붙인다.
 
+🔴 화면 아래쪽은 **3버튼 내비게이션으로도** 본다(부모님 폰이 그렇다 · 에뮬레이터 기본은 얇은 제스처 바라 가림이 안 보인다 · UI_GUIDE.md §3):
+
+```bash
+adb -s emulator-5586 shell cmd overlay enable com.android.internal.systemui.navbar.threebutton
+adb -s emulator-5586 shell cmd overlay disable com.android.internal.systemui.navbar.gestural
+```
+
 ```bash
 # 개발 빌드 설치 + Metro (Expo Go 는 안 된다. 로컬 네이티브 모듈이 있다)
 ANDROID_SERIAL=emulator-5586 npx expo run:android --port 8093 --device tts_sentence

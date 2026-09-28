@@ -49,6 +49,11 @@ grep -q 'signingConfigs.upload' android/app/build.gradle \
   || { echo "🔴 release 가 upload 서명을 안 쓴다. 플러그인 앵커가 깨졌다"; exit 1; }
 grep -q "versionCode $VC" android/app/build.gradle \
   || { echo "🔴 build.gradle 의 versionCode 가 app.json($VC)과 다르다"; exit 1; }
+# 🔴 OTA 채널이 바이너리에 박혔나. 로컬 Gradle 빌드는 eas.json 채널을 안 읽는다(common/OTA_RULES.md §5 · docs/BUILD.md §5)
+grep -q 'UPDATES_CONFIGURATION_REQUEST_HEADERS_KEY' android/app/src/main/AndroidManifest.xml \
+  || { echo "🔴 매니페스트에 OTA 채널 헤더가 없다. 이 빌드는 OTA 를 영영 못 받는다"; exit 1; }
+# 🔴 임베드 매니페스트를 새로 굽게 한다. UP-TO-DATE 로 건너뛰면 옛 commitTime 이 박혀 새 빌드가 옛 OTA 로 돈다(공용 §3.1)
+rm -rf android/app/build/generated/assets/createReleaseUpdatesResources android/app/build/intermediates/assets/release
 
 # ── ④ AAB ──
 echo "▶ bundleRelease (몇 분 걸린다. 멈춘 것이 아니다)"
@@ -66,6 +71,13 @@ AAB=android/app/build/outputs/bundle/release/app-release.aab
 SHA1=$(keytool -printcert -jarfile "$AAB" 2>/dev/null | grep -m1 'SHA1:' | awk '{print $2}')
 [ "$SHA1" = "$EXPECTED_SHA1" ] || { echo "🔴 서명 SHA1 이 업로드 키가 아니다: $SHA1"; exit 1; }
 echo "✓ 업로드 키로 서명됨 ($SHA1)"
+
+# ── ⑤-1 OTA 임베드 매니페스트 (공용 §3.1: 임베드 commitTime 이 서버 최신 OTA 보다 새로워야 한다) ──
+grep -q "createReleaseUpdatesResources" "$LOG" || echo "⚠ 로그에 createReleaseUpdatesResources 가 안 보인다"
+grep -q "createReleaseUpdatesResources UP-TO-DATE" "$LOG" && { echo "🔴 임베드 매니페스트가 UP-TO-DATE 로 건너뛰어졌다"; exit 1; }
+EMBED=$(unzip -p "$AAB" base/assets/app.manifest 2>/dev/null | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{const m=JSON.parse(s);console.log(m.id+' · '+new Date(m.commitTime).toISOString()+' · runtime '+(m.runtimeVersion||'?'))}catch{console.log('')}})")
+[ -n "$EMBED" ] || { echo "🔴 AAB 에 임베드 매니페스트(app.manifest)가 없다"; exit 1; }
+echo "✓ 임베드 매니페스트: $EMBED"
 
 # ── ⑥ 권한 목록 (산출물에만 있는 병합 결과를 눈으로 본다) ──
 echo "▶ 병합 매니페스트의 권한"
