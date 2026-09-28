@@ -142,6 +142,21 @@ export function IconButton({
   );
 }
 
+/** 추가 동작은 우측 상단 + 아이콘 하나로 (CLAUDE.md 결정 #19 · UI_GUIDE.md §3 예외 2) */
+export function AddIconButton({ label, onPress }: { label: string; onPress: () => void }) {
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      hitSlop={8}
+      onPress={onPress}
+      style={({ pressed }) => [styles.addIcon, pressed && styles.pressed]}
+    >
+      <Ionicons name="add" size={34} color={COLOR.primary} />
+    </Pressable>
+  );
+}
+
 export function Section({ title, children }: { title?: string; children: ReactNode }) {
   return (
     <View style={styles.section}>
@@ -297,6 +312,7 @@ const styles = StyleSheet.create({
   buttonLabel: { ...TYPE.button },
   buttonLabelCompact: { fontSize: 16 },
   iconButton: { alignItems: 'center', justifyContent: 'center', backgroundColor: COLOR.surface },
+  addIcon: { width: TOUCH, height: TOUCH, alignItems: 'center', justifyContent: 'center' },
   section: { paddingHorizontal: SPACE.xl, paddingVertical: SPACE.md, gap: SPACE.md },
   sectionTitle: { ...TYPE.heading, color: COLOR.text },
   empty: { padding: SPACE.xxl, alignItems: 'center' },

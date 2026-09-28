@@ -1,35 +1,51 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Button, EmptyState, Header, Screen } from '@/components/ui';
-import { addToPlaylist, useLibrary } from '@/features/library';
+import { addToPlaylist, getPlaylistItems, useLibrary } from '@/features/library';
 import { COLOR, RADIUS, SPACE, TOUCH, TYPE } from '@/theme';
 
-// 재생목록에 문장 넣기 (깊이 2). 고른 순서대로 끝에 붙는다
+// 재생목록에 문장 넣기 (깊이 2). 체크박스 켜기/끄기 · 이미 든 문장은 안 보인다 (CLAUDE.md 결정 #18)
+// 넣는 순서는 목록에 보이는 순서다(고른 순서가 아니다)
 
 export default function PickSentences() {
   const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const sentences = useLibrary((s) => s.sentences);
-  const [picked, setPicked] = useState<string[]>([]);
+  const playlist = useLibrary((s) => s.playlists.find((p) => p.id === id));
+  const [picked, setPicked] = useState<Set<string>>(new Set());
+
+  // 이미 이 재생목록에 든 문장은 고를 수 없게 아예 뺀다
+  const candidates = useMemo(() => {
+    if (!playlist) return [];
+    const inside = new Set(getPlaylistItems(playlist.id).map((it) => it.sentenceId));
+    return sentences.filter((s) => !inside.has(s.id));
+  }, [playlist, sentences]);
 
   const toggle = (sid: string) =>
-    setPicked((cur) => (cur.includes(sid) ? cur.filter((x) => x !== sid) : [...cur, sid]));
+    setPicked((cur) => {
+      const next = new Set(cur);
+      if (next.has(sid)) next.delete(sid);
+      else next.add(sid);
+      return next;
+    });
+
+  const count = picked.size;
+  const empty = sentences.length === 0 ? t('pick.empty') : t('pick.allIn');
 
   return (
     <Screen edges={['top', 'bottom']}>
       <Header title={t('pick.title')} />
       <FlatList
-        data={sentences}
+        data={candidates}
         keyExtractor={(s) => s.id}
         contentContainerStyle={styles.list}
-        ListEmptyComponent={<EmptyState text={t('pick.empty')} />}
+        ListEmptyComponent={<EmptyState text={empty} />}
         renderItem={({ item }) => {
-          const order = picked.indexOf(item.id);
-          const on = order >= 0;
+          const on = picked.has(item.id);
           return (
             <Pressable
               accessibilityRole="checkbox"
@@ -37,13 +53,11 @@ export default function PickSentences() {
               onPress={() => toggle(item.id)}
               style={({ pressed }) => [styles.row, on && styles.rowOn, pressed && styles.pressed]}
             >
-              {on ? (
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{order + 1}</Text>
-                </View>
-              ) : (
-                <Ionicons name="square-outline" size={30} color={COLOR.textFaint} />
-              )}
+              <Ionicons
+                name={on ? 'checkbox' : 'square-outline'}
+                size={32}
+                color={on ? COLOR.primary : COLOR.textFaint}
+              />
               <Text style={styles.text}>{item.text}</Text>
             </Pressable>
           );
@@ -51,11 +65,14 @@ export default function PickSentences() {
       />
       <View style={styles.bottom}>
         <Button
-          label={picked.length ? t('pick.add', { n: picked.length }) : t('pick.none')}
+          label={count ? t('pick.add', { n: count }) : t('pick.none')}
           icon="checkmark"
-          disabled={picked.length === 0}
+          disabled={count === 0}
           onPress={() => {
-            addToPlaylist(id, picked);
+            addToPlaylist(
+              id,
+              candidates.filter((s) => picked.has(s.id)).map((s) => s.id),
+            );
             router.back();
           }}
         />
@@ -74,19 +91,10 @@ const styles = StyleSheet.create({
     minHeight: TOUCH,
     padding: SPACE.lg,
     borderRadius: RADIUS,
-    borderWidth: 1,
-    borderColor: COLOR.border,
+    borderWidth: 1.5,
+    borderColor: COLOR.cardBorder,
   },
   rowOn: { borderColor: COLOR.primary, backgroundColor: COLOR.primarySoft },
-  badge: {
-    width: 30,
-    height: 30,
-    borderRadius: 8,
-    backgroundColor: COLOR.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  badgeText: { color: COLOR.primaryText, fontWeight: '700', fontSize: 16 },
   text: { ...TYPE.sentence, color: COLOR.text, flex: 1 },
   bottom: { padding: SPACE.xl, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: COLOR.border },
 });

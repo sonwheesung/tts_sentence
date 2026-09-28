@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, Linking, StyleSheet, Text, View } from 'react-native';
 
-import { Button, Header, Screen } from '@/components/ui';
+import { AddIconButton, Button, Header, Screen } from '@/components/ui';
 import { setDefaultPreset, useLibrary } from '@/features/library';
 import { listVoices } from '@/features/tts';
 import { COLOR, RADIUS, SPACE, TYPE } from '@/theme';
@@ -25,7 +25,10 @@ export default function PresetList() {
 
   return (
     <Screen edges={['top', 'bottom']}>
-      <Header title={t('presets.title')} />
+      <Header
+        title={t('presets.title')}
+        right={<AddIconButton label={t('presets.add')} onPress={() => router.push('/preset/edit')} />}
+      />
       <FlatList
         data={presets}
         keyExtractor={(p) => p.id}
@@ -47,7 +50,6 @@ export default function PresetList() {
                 />
               </View>
             ) : null}
-            <Button label={t('presets.add')} icon="add" onPress={() => router.push('/preset/edit')} />
           </View>
         }
         renderItem={({ item }) => {
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
   help: { ...TYPE.sub, color: COLOR.textSub },
   warnBox: { backgroundColor: COLOR.dangerSoft, borderRadius: RADIUS, padding: SPACE.lg, gap: SPACE.md },
   warn: { ...TYPE.sub, color: COLOR.text },
-  card: { borderRadius: RADIUS, borderWidth: 1, borderColor: COLOR.border, padding: SPACE.lg, gap: SPACE.sm },
+  card: { borderRadius: RADIUS, borderWidth: 1.5, borderColor: COLOR.cardBorder, padding: SPACE.lg, gap: SPACE.sm },
   cardDefault: { borderColor: COLOR.primary },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: SPACE.sm },
   name: { ...TYPE.heading, color: COLOR.text, flexShrink: 1 },

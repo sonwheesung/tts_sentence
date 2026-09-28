@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { Button, EmptyState, Screen, TabTitle } from '@/components/ui';
+import { AddIconButton, Button, EmptyState, Screen, TabTitle } from '@/components/ui';
 import { useLibrary, type Sentence } from '@/features/library';
 import { playEntries, usePlayer } from '@/features/player';
 import { COLOR, RADIUS, SPACE, TYPE } from '@/theme';
@@ -28,14 +28,11 @@ export default function SentencesTab() {
 
   return (
     <Screen>
-      <TabTitle title={t('sentences.title')} />
+      <TabTitle
+        title={t('sentences.title')}
+        right={<AddIconButton label={t('sentences.add')} onPress={() => router.push('/sentence/edit')} />}
+      />
       <View style={styles.actions}>
-        <Button
-          label={t('sentences.add')}
-          icon="add"
-          onPress={() => router.push('/sentence/edit')}
-          style={styles.flex}
-        />
         <Button
           label={t('sentences.playAll')}
           icon="play"
@@ -81,8 +78,8 @@ const styles = StyleSheet.create({
   list: { paddingHorizontal: SPACE.xl, paddingBottom: SPACE.xxl, gap: SPACE.md },
   card: {
     borderRadius: RADIUS,
-    borderWidth: 1,
-    borderColor: COLOR.border,
+    borderWidth: 1.5,
+    borderColor: COLOR.cardBorder,
     padding: SPACE.lg,
     gap: SPACE.sm,
     backgroundColor: COLOR.background,

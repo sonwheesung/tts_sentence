@@ -252,7 +252,7 @@ function touchPlaylist(id: string) {
   getDb().runSync('UPDATE playlists SET updated_at = ? WHERE id = ?', Date.now(), id);
 }
 
-/** 같은 문장 중복 허용 (결정 #12). 끝에 붙인다 */
+/** 끝에 붙인다. 한 재생목록에 같은 문장은 한 번만 (결정 #18) · 이미 든 문장과 인자 안의 겹침은 건너뛴다 */
 export function addToPlaylist(playlistId: string, sentenceIds: string[]) {
   const db = getDb();
   db.withTransactionSync(() => {
@@ -261,7 +261,17 @@ export function addToPlaylist(playlistId: string, sentenceIds: string[]) {
         'SELECT MAX(position) AS m FROM playlist_items WHERE playlist_id = ?',
         playlistId,
       )?.m ?? -1) + 1;
+    const inside = new Set(
+      db
+        .getAllSync<{ sentence_id: string }>(
+          'SELECT sentence_id FROM playlist_items WHERE playlist_id = ?',
+          playlistId,
+        )
+        .map((r) => r.sentence_id),
+    );
     for (const sid of sentenceIds) {
+      if (inside.has(sid)) continue;
+      inside.add(sid);
       db.runSync(
         'INSERT INTO playlist_items (id, playlist_id, sentence_id, position) VALUES (?, ?, ?, ?)',
         randomUUID(),

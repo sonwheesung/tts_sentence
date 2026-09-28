@@ -9,6 +9,8 @@ export const COLOR = {
   textSub: '#4B5563',
   textFaint: '#6B7280',
   border: '#D9DEE5',
+  /** 카드 테두리. border 는 실기기에서 좌우 선이 안 보일 만큼 옅었다(2026-09-28 사용자 제보) */
+  cardBorder: '#A9B3C1',
   primary: '#2563EB',
   primaryText: '#FFFFFF',
   primarySoft: '#E0EAFF',

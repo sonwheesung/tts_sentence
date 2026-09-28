@@ -45,7 +45,7 @@ CREATE TABLE playlists (
 );
 
 CREATE TABLE playlist_items (
-  id          TEXT PRIMARY KEY,     -- 같은 문장 중복 허용(결정 #12) → 항목 자체 id
+  id          TEXT PRIMARY KEY,     -- 항목 자체 id(순서 · 빼기 대상). 한 재생목록에 같은 문장은 한 번만(결정 #18 · 코드가 막는다 · DB 제약은 없다)
   playlist_id TEXT NOT NULL REFERENCES playlists(id) ON DELETE CASCADE,
   sentence_id TEXT NOT NULL REFERENCES sentences(id) ON DELETE CASCADE,
   position    INTEGER NOT NULL

@@ -5,7 +5,7 @@ import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
 
 import { MiniPlayer } from '@/components/mini-player';
 import { NameDialog } from '@/components/name-dialog';
-import { Button, EmptyState, Header, IconButton, Screen } from '@/components/ui';
+import { AddIconButton, Button, EmptyState, Header, IconButton, Screen } from '@/components/ui';
 import {
   deletePlaylist,
   getPlaylistItems,
@@ -60,7 +60,15 @@ export default function PlaylistDetail() {
 
   return (
     <Screen edges={['top', 'bottom']}>
-      <Header title={playlist.name} />
+      <Header
+        title={playlist.name}
+        right={
+          <AddIconButton
+            label={t('playlist.addSentences')}
+            onPress={() => router.push({ pathname: '/playlist/pick', params: { id: playlist.id } })}
+          />
+        }
+      />
       <FlatList
         data={entries}
         keyExtractor={(e) => e.itemId}
@@ -73,22 +81,12 @@ export default function PlaylistDetail() {
               disabled={entries.length === 0}
               onPress={() => playEntries(entries, 0, playlist.name)}
             />
-            <View style={styles.row}>
-              <Button
-                label={t('playlist.addSentences')}
-                icon="add"
-                kind="secondary"
-                style={styles.flex}
-                onPress={() => router.push({ pathname: '/playlist/pick', params: { id: playlist.id } })}
-              />
-              <Button
-                label={t('playlist.rename')}
-                icon="create-outline"
-                kind="secondary"
-                style={styles.flex}
-                onPress={() => setRenaming(true)}
-              />
-            </View>
+            <Button
+              label={t('playlist.rename')}
+              icon="create-outline"
+              kind="secondary"
+              onPress={() => setRenaming(true)}
+            />
           </View>
         }
         ListEmptyComponent={<EmptyState text={t('playlist.empty')} />}
@@ -157,12 +155,11 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   list: { paddingHorizontal: SPACE.xl, paddingBottom: SPACE.xxl, gap: SPACE.md },
   top: { gap: SPACE.md, paddingTop: SPACE.lg, paddingBottom: SPACE.sm },
-  row: { flexDirection: 'row', gap: SPACE.md },
   footer: { paddingTop: SPACE.xxl },
   card: {
     borderRadius: RADIUS,
-    borderWidth: 1,
-    borderColor: COLOR.border,
+    borderWidth: 1.5,
+    borderColor: COLOR.cardBorder,
     padding: SPACE.lg,
     gap: SPACE.md,
   },
